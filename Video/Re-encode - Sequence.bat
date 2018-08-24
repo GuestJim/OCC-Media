@@ -8,6 +8,8 @@ set output=%~2
 set cut=%~3
 ::	not strictly needed, but helpful for remembering
 
+TITLE %input% to %output%
+
 if NOT EXIST "%~dp1%folder%" (
 mkdir "%~dp1%folder%"
 )
