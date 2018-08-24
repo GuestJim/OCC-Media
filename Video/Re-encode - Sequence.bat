@@ -1,5 +1,4 @@
 @echo off
-::echo "%~1"
 
 set folder=Re-encode
 set rate=30M
