@@ -10,6 +10,9 @@ set output=%~2
 set cut=%~3
 ::	not strictly needed, but helpful for remembering
 
+TITLE %input% to %output%
+::	sets the title of the console window to show the input file name "to" the output file name
+
 if NOT EXIST "%~dp1%folder%" (
 mkdir "%~dp1%folder%"
 )
