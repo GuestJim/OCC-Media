@@ -2,7 +2,7 @@
 
 pushd %~dp0
 
-set /p num="How Many Videos: "
+set /p num="How Many Parts: "
 
 python "YouTube Thumbnails.py" "%~1" "%~2" %num% "%~dp1
 ::	curiously I cannot close for the path
