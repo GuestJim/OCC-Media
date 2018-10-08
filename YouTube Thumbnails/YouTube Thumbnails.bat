@@ -2,7 +2,7 @@
 
 pushd %~dp0
 
-set /p num="How Many Videos: "
+set /p num="How Many Parts: "
 ::	Allows the user to pass a number to the scripts, for how many of the Part # thumbnails to create
 
 python "YouTube Thumbnails.py" "%~1" "%~2" %num% "%~dp1
