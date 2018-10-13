@@ -2,7 +2,7 @@ The purpose to these scripts is to take an SVG and automatically generate a seri
 
 To function the SVG needs to have two pieces of text in them !TYPE! and !PART!
 
-	For my reviews I work with two different types of videos that need thumbnails: review playthrough videos and general videos to share. The !TYPE! string is to mark which it is and !PART! will be either the 'Part #' identifier or the specific name for the general video.
+For my reviews I work with two different types of videos that need thumbnails: review playthrough videos and general videos to share. The !TYPE! string is to mark which it is and !PART! will be either the 'Part #' identifier or the specific name for the general video.
 	
 Once the SVG has been made and contains the appropriate strings (!TYPE! and !PART!), simply drag-and-drop it onto the YouTube Thumbnails.bat file. The Batch file will ask how many parts there are, this is for the 'Part #' thumbnails. The PNG files produced for these will have zero padding to two digits, but the padding will not be within the image.
 
