@@ -9,7 +9,13 @@ else:
 	NameStop = 0
 #	this is the variable for the Part # and needs to be converted from type String to a number
 # 	the If/Else is so one can skip providing a number without error
-droppedPath = sys.argv[4]
+if not sys.argv[4] == '':
+	height = int(float(sys.argv[4]))
+else:
+	height = 768
+#	this allows a custom height for the PNG to be passed to this script from the BATCH file
+# 	the If/Else is so one can skip providing a number without error
+droppedPath = sys.argv[5]
 #	assigns the values of the Batch Parameters passed to the Python script to these variables
 
 if not droppedList == '':
@@ -22,9 +28,6 @@ else:
 	
 foldnam = "YouTube Thumbnails"
 #	folder name variable
-
-height = 768
-#	YouTube has a thumbnail size limitation of 2 MB, so changing the height may be necessary
 
 os.chdir(droppedPath)
 #	sets the working directory to that of the SVG file dropped onto the Batch script
