@@ -1,8 +1,15 @@
 import sys, os
 droppedFile = sys.argv[1]
 droppedList = sys.argv[2]
-NameStop = int(float(sys.argv[3]))
-droppedPath = sys.argv[4]
+if not sys.argv[3] == '':
+	NameStop = int(float(sys.argv[3]))
+else:
+	NameStop = 0
+if not sys.argv[4] == '':
+	height = int(float(sys.argv[4]))
+else:
+	height = int(768)
+droppedPath = sys.argv[5] 
 
 if not droppedList == '':
 	with open(droppedList, 'r') as LIST:
@@ -11,8 +18,6 @@ else:
 	NameList = []
 
 foldnam = "YouTube Thumbnails"
-
-height = 768
 
 os.chdir(droppedPath)
 if not os.path.exists(foldnam):
