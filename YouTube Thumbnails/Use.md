@@ -8,4 +8,6 @@ Once the SVG has been made and contains the appropriate strings (!TYPE! and !PAR
 
 If you wish to generate thumbnails for other videos fromt he same background image, create a plain text file with the names you want on separate lines. With both the SVG and this text file selected, click and drag from the SVG file onto the Batch file. You will still be asked about the number of parts, but you can press Enter to skip this, give it 0, or give it the desired number. The appropriate images will be made and the file names will contain the name from the list you provided.
 
-To tune the size of the thumbnails, so you can meet and not exceed the 2 MB limit, there is a height variable in 'YouTube Thumbnails.py'
+~~To tune the size of the thumbnails, so you can meet and not exceed the 2 MB limit, there is a height variable in 'YouTube Thumbnails.py'~~
+
+Now to set the height of the output thumbnails, the Batch file will request a value, like it does for Part number. If a value is not given, the Python script will use a default value of 768.
