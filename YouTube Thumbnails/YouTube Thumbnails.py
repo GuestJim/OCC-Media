@@ -8,7 +8,7 @@ else:
 if not sys.argv[4] == '':
 	height = int(float(sys.argv[4]))
 else:
-	height = int(768)
+	height = 768
 droppedPath = sys.argv[5] 
 
 if not droppedList == '':
