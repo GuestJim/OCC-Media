@@ -1,5 +1,6 @@
 import sys, os
 droppedFile = sys.argv[1]
+droppedName = droppedFile.rsplit("\\",1)[1].split(".")[0]
 droppedList = sys.argv[2]
 if not sys.argv[3] == '':
 	NameStop = int(float(sys.argv[3]))
@@ -25,6 +26,13 @@ if not os.path.exists(foldnam):
 os.chdir(droppedPath + foldnam)
 
 title = "Review Playthrough"
+
+if not os.path.exists(droppedName + ".png"):	
+	with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
+		for line in fref:
+			fout.write(line.replace("!TYPE!", "").replace("!PART!", ""))
+		fout.close()
+	os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+droppedName+'.png"')
 
 for name in range(1, NameStop + 1):
 	Snam = str(name)
