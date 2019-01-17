@@ -37,22 +37,22 @@ if not os.path.exists(droppedName + ".png"):
 for name in range(1, NameStop + 1):
 	Snam = str(name)
 	Znam = format(name, '02')	
-	if not os.path.exists("Thumbnail - " + Znam + ".png"):	
+	if not os.path.exists("Stream - " + Znam + ".png"):	
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 			for line in fref:
 				fout.write(line.replace("!TYPE!", title).replace("!PART!", "Part " + Snam))
 			fout.close()
-		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "Thumbnail - '+Znam+'.png"')
+		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "Stream - '+Znam+'.png"')
 
 title = "Review"
 
 for name in NameList:
-	if not os.path.exists("Thumbnail - " + name + ".png"):	
+	if not os.path.exists("Review - " + name + ".png"):	
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 			for line in fref:
 				fout.write(line.replace("!TYPE!", title).replace("!PART!", name))
 			fout.close()
-		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "Thumbnail - '+name+'.png"')
+		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "Review - '+name+'.png"')
 
 if os.path.exists("Temp.svg"):
 	os.remove("Temp.svg")
