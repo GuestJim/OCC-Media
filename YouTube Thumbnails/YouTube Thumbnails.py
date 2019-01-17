@@ -58,7 +58,7 @@ for name in range(1, NameStop + 1):
 #		string version of the name for easy line replacement
 	Znam = format(name, '02')	
 #		zero-padded version of the name for export file names
-	if not os.path.exists("Thumbnail - " + Znam + ".png"):
+	if not os.path.exists("Stream - " + Znam + ".png"):
 #		checks if the thumbnail already exists and will skip if it does
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 #			opens and reads the original SVG to the fref variable
@@ -71,7 +71,7 @@ for name in range(1, NameStop + 1):
 #						a new version of Temp.svg is made each time
 			fout.close()
 #				closes fout, which finishes the file so it can be used
-		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "Thumbnail - '+Znam+'.png"')
+		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "Stream - '+Znam+'.png"')
 #			goes to the OS to run the provided command, in this case Inkscape
 #				info on Inkscape commands:	https://inkscape.org/en/doc/inkscape-man.html
 		
@@ -80,7 +80,7 @@ title = "Review"
 
 for name in NameList:
 #	For loop going through the list of video names that can be given to the script
-	if not os.path.exists("Thumbnail - " + name + ".png"):
+	if not os.path.exists("Review - " + name + ".png"):
 #		checks if the thumbnail already exists and will skip if it does
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 #			opens and reads the original SVG to the fref variable
@@ -93,7 +93,7 @@ for name in NameList:
 #						a new version of Temp.svg is made each time
 			fout.close()
 #				closes fout, which finishes the file so it can be used
-		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "Thumbnail - '+Znam+'.png"')
+		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "Review - '+Znam+'.png"')
 #			goes to the OS to run the provided command, in this case Inkscape
 #				info on Inkscape commands:	https://inkscape.org/en/doc/inkscape-man.html
 
