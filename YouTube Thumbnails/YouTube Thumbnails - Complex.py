@@ -58,7 +58,6 @@ for name in range(1, NameStop + 1):
 	Snam = str(name)
 	Znam = format(name, '02')	
 	if not os.path.exists(titleFilePart + " - " + Znam + ".png"):	
-		print(titleFilePart + " - " + Znam + ".png")
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 			for line in fref:
 				fout.write(line.replace("!TYPE!", titleProjLong).replace("!PART!", vidBreak + " " + Snam).replace("!LIST!", NameList[name - 1]))
