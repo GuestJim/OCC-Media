@@ -17,29 +17,43 @@ titleFileList = "Review"
 vidBreak = "Part"
 #	how the videos break (Part, Chapter, etc)
 
-droppedFile = sys.argv[1]
+droppedSVG = None
+droppedTXT = None
+
+for file in sys.argv[1:]:
+	#if ".svg" in file:
+	if files.endswith(".svg"):
+		droppedSVG = file
+	#if ".txt" in file:
+	if files.endswith(".txt"):
+		droppedTXT = file
+
+droppedFile = droppedSVG
 droppedName = droppedFile.rsplit("\\",1)[1].split(".")[0]
 droppedPath = droppedFile.rsplit("\\",1)[0] + "\\"
 
-try:
-	with open(sys.argv[2], 'r') as LIST:
+print(droppedSVG)
+print(droppedTXT)
+
+if droppedTXT is not None:
+	with open(droppedTXT, 'r') as LIST:
 		NameList = LIST.read().splitlines()
-except:
+else:
 	NameList = []
 	
-NameStop = input("How many parts: ")
+NameStop = input("How many parts: ") or 0
 
-if NameStop == '':
-	NameStop = 0
-else:
-	NameStop = int(NameStop)
+# if NameStop == '':
+	# NameStop = 0
+# else:
+	# NameStop = int(NameStop)
 
-height = input("Image Height (default 768): ")
+height = input("Image Height (default 768): ") or 768
 
-if height == '':
-	height = 768
-else:
-	height = int(height)
+# if height == '':
+	# height = 768
+# else:
+	# height = int(height)
 
 os.chdir(droppedPath)
 if not os.path.exists(foldnam):
@@ -60,7 +74,10 @@ for name in range(1, NameStop + 1):
 	if not os.path.exists(titleFilePart + " - " + Znam + ".png"):	
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 			for line in fref:
-				fout.write(line.replace("!TYPE!", titleProjLong).replace("!PART!", vidBreak + " " + Snam).replace("!LIST!", NameList[name - 1]))
+				if droppedTXT is not None:
+					fout.write(line.replace("!TYPE!", titleProjLong).replace("!PART!", vidBreak + " " + Snam).replace("!LIST!", NameList[name - 1]))
+				else:
+					fout.write(line.replace("!TYPE!", titleProjLong).replace("!PART!", vidBreak + " " + Snam))
 			fout.close()
 		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+titleFilePart+' - '+Znam+'.png"')
 

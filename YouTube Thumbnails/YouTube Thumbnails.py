@@ -27,19 +27,19 @@ try:
 except:
 	NameList = []
 	
-NameStop = input("How many parts: ")
+NameStop = input("How many parts: ") or 0
 
-if NameStop == '':
-	NameStop = 0
-else:
-	NameStop = int(NameStop)
+# if NameStop == '':
+	# NameStop = 0
+# else:
+	# NameStop = int(NameStop)
 
-height = input("Image Height (default 768): ")
+height = input("Image Height (default 768): ") or 768
 
-if height == '':
-	height = 768
-else:
-	height = int(height)
+# if height == '':
+	# height = 768
+# else:
+	# height = int(height)
 
 os.chdir(droppedPath)
 if not os.path.exists(foldnam):
