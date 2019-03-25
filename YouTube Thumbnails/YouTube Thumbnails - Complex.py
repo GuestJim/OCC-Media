@@ -35,25 +35,13 @@ except:
 #	tries to grab a second dropped filed and then read its contents into a list
 #	if there is no second dropped file, it makes the list empty
 	
-NameStop = input("How many parts: ")
+NameStop = input("How many parts: ") or 0
 #	asks the user to state how many Part images to create
+#	defaults to 0 if no input is provided
 
-if NameStop == '':
-	NameStop = 0
-else:
-	NameStop = int(NameStop)
-#	if the user does not provide a number for Parts, it uses a default of 0
-#		it is necessary for the variable type to be integer but input() returns a string, hence the type conversion
-
-height = input("Image Height (default 768): ")
+height = input("Image Height (default 768): ") or 768
 #	asks the user to state how many Part images to create
-
-if height == '':
-	height = 768
-else:
-	height = int(height)
-#	if the user does not provide a height for images, it uses a default of 768
-#		it is necessary for the variable type to be integer but input() returns a string, hence the type conversion
+#	defaults to 768 if no input is provided
 
 os.chdir(droppedPath)
 #	sets the working directory to that of the SVG file dropped onto the Batch script
