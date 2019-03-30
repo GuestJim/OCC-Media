@@ -35,11 +35,11 @@ except:
 #	tries to grab a second dropped filed and then read its contents into a list
 #	if there is no second dropped file, it makes the list empty
 	
-NameStop = input("How many parts: ") or 0
+NameStop = int(input("How many parts: ")) or 0
 #	asks the user to state how many Part images to create
 #	defaults to 0 if no input is provided
 
-height = input("Image Height (default 768): ") or 768
+height = int(input("Image Height (default 768): ")) or 768
 #	asks the user to state how many Part images to create
 #	defaults to 768 if no input is provided
 
