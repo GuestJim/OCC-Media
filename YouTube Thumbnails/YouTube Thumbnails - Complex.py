@@ -41,14 +41,14 @@ if droppedTXT is not None:
 else:
 	NameList = []
 	
-NameStop = int(input("How many parts: ")) or 0
+NameStop = int(input("How many parts: ") or 0)
 
 # if NameStop == '':
 	# NameStop = 0
 # else:
 	# NameStop = int(NameStop)
 
-height = int(input("Image Height (default 768): ")) or 768
+height = int(input("Image Height (default 768): ") or 768)
 
 # if height == '':
 	# height = 768
