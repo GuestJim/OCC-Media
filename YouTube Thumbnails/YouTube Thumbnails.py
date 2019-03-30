@@ -27,14 +27,14 @@ try:
 except:
 	NameList = []
 	
-NameStop = input("How many parts: ") or 0
+NameStop = int(input("How many parts: ")) or 0
 
 # if NameStop == '':
 	# NameStop = 0
 # else:
 	# NameStop = int(NameStop)
 
-height = input("Image Height (default 768): ") or 768
+height = int(input("Image Height (default 768): ")) or 768
 
 # if height == '':
 	# height = 768
@@ -76,4 +76,4 @@ for name in NameList:
 if os.path.exists("Temp.svg"):
 	os.remove("Temp.svg")
 
-#os.system("pause")
+# os.system("pause")
