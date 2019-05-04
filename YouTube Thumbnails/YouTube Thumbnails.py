@@ -31,7 +31,7 @@ except:
 	NameList = []
 #	tries to grab a second dropped filed and then read its contents into a list
 #	if there is no second dropped file, it makes the list empty
-	
+
 NameStop = int(input("How many parts: ") or 0)
 #	asks the user to state how many Part images to create
 #	defaults to 0 if no input is provided
@@ -67,6 +67,8 @@ for name in range(1, NameStop + 1):
 #		zero-padded version of the name for export file names
 	if not os.path.exists(titleFilePart + " - " + Znam + ".png"):
 #		checks if the thumbnail already exists and will skip if it does
+		print(titleFilePart + " - " + Znam + "\n")
+#			prints a message identifying the thumbnail being generated
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 #			opens and reads the original SVG to the fref variable
 #			opens the Temp.svg file for writing too, and calls it fout
@@ -84,8 +86,10 @@ for name in range(1, NameStop + 1):
 
 for name in NameList:
 #	For loop going through the list of video names that can be given to the script
-	if not os.path.exists(titleFileList + " - " + name + ".png"):	
+	if not os.path.exists(titleFileList + " - " + name + ".png"):
 #		checks if the thumbnail already exists and will skip if it does
+		print(titleFileList + " - " + name + "\n")
+#			prints a message identifying the thumbnail being generated
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 #			opens and reads the original SVG to the fref variable
 #			opens the Temp.svg file for writing too, and calls it fout
