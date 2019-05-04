@@ -40,7 +40,7 @@ if droppedTXT is not None:
 		NameList = LIST.read().splitlines()
 else:
 	NameList = []
-	
+
 NameStop = int(input("How many parts: ") or 0)
 
 # if NameStop == '':
@@ -70,8 +70,9 @@ if not os.path.exists(droppedName + ".png"):
 
 for name in range(1, NameStop + 1):
 	Snam = str(name)
-	Znam = format(name, '02')	
-	if not os.path.exists(titleFilePart + " - " + Znam + ".png"):	
+	Znam = format(name, '02')
+	if not os.path.exists(titleFilePart + " - " + Znam + ".png"):
+		print(titleFilePart + " - " + Znam + "\n")
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 			for line in fref:
 				if droppedTXT is not None:
