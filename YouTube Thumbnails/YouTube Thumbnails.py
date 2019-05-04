@@ -26,7 +26,7 @@ try:
 		NameList = LIST.read().splitlines()
 except:
 	NameList = []
-	
+
 NameStop = int(input("How many parts: ") or 0)
 
 # if NameStop == '':
@@ -57,8 +57,9 @@ if not os.path.exists(droppedName + ".png"):
 
 for name in range(1, NameStop + 1):
 	Snam = str(name)
-	Znam = format(name, '02')	
-	if not os.path.exists(titleFilePart + " - " + Znam + ".png"):	
+	Znam = format(name, '02')
+	if not os.path.exists(titleFilePart + " - " + Znam + ".png"):
+		print(titleFilePart + " - " + Znam + "\n")
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 			for line in fref:
 				fout.write(line.replace("!TYPE!", titleProjLong).replace("!PART!", vidBreak + " " + Snam))
@@ -66,7 +67,8 @@ for name in range(1, NameStop + 1):
 		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+titleFilePart+' - '+Znam+'.png"')
 
 for name in NameList:
-	if not os.path.exists(titleFileList + " - " + name + ".png"):	
+	if not os.path.exists(titleFileList + " - " + name + ".png"):
+		print(titleFileList + " - " + name + "\n")
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 			for line in fref:
 				fout.write(line.replace("!TYPE!", titleProjEdit).replace("!PART!", name))
