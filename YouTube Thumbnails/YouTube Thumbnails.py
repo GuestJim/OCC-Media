@@ -7,8 +7,6 @@ START	=	1
 
 titleProjLong	=	"Review Playthrough"
 #	Project Title for unedited videos
-titleProjEdit	=	"Review"
-#	Project Title edited videos
 
 titleFilePart	=	"Stream"
 #	File title for iterated thumbnails
@@ -59,22 +57,22 @@ if not os.path.exists(droppedName + ".png"):
 
 for place in range(1, NameStop + 1):
 	Znam	=	format(place, '02')
-	if not os.path.exists(titleFileList + " - " + Znam + ".png"):
-		print(titleFileList + " - " + Znam + "\n")
+	if not os.path.exists(titleFilePart + " - " + Znam + ".png"):
+		print(titleFilePart + " - " + Znam + "\n")
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 			for line in fref:
 				fout.write(REPLACE(line, titleProjLong, PART = place))
 			fout.close()
-		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+titleFileList+' - '+Znam+'.png"')
+		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+titleFilePart+' - '+Znam+'.png"')
 
 for name in NameList:
-	if not os.path.exists(titleProjEdit + " - " + name + ".png"):
-		print(titleProjEdit + " - " + name + "\n")
+	if not os.path.exists(titleFileList + " - " + name + ".png"):
+		print(titleFileList + " - " + name + "\n")
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 			for line in fref:
 				fout.write(REPLACE(line, titleProjLong, LIST = name))
 			fout.close()
-		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+titleProjEdit+' - '+name+'.png"')
+		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+titleFileList+' - '+name+'.png"')
 
 if os.path.exists("Temp.svg"):
 	os.remove("Temp.svg")
