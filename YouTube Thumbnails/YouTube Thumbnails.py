@@ -2,44 +2,46 @@
 
 import sys, os
 
-foldnam = "YouTube Thumbnails"
+foldnam	=	"YouTube Thumbnails"
+START	=	1
 
-titleProjLong = "Review Playthough"
+titleProjLong	=	"Review Playthrough"
 #	Project Title for unedited videos
-titleProjEdit = "Review"
+titleProjEdit	=	"Review"
 #	Project Title edited videos
 
-titleFilePart = "Stream"
+titleFilePart	=	"Stream"
 #	File title for iterated thumbnails
-titleFileList = "Review"
+titleFileList	=	"Review"
 #	File title for named thumbnails
 
-vidBreak = "Part"
+vidBreak		=	"Part "
 #	how the videos break (Part, Chapter, etc)
 
-droppedFile = sys.argv[1]
-droppedName = droppedFile.rsplit("\\",1)[1].split(".")[0]
-droppedPath = droppedFile.rsplit("\\",1)[0] + "\\"
+def	REPLACE(input, TYPE = titleProjLong, PART = "", LIST = ""):
+	if type(PART) == int:
+		PART	=	vidBreak + str(PART)
+	return(input.replace("!TYPE!", TYPE).replace("!PART!", PART).replace("!LIST!", LIST));
 
-try:
-	with open(sys.argv[2], 'r') as LIST:
-		NameList = LIST.read().splitlines()
-except:
-	NameList = []
+if len(sys.argv) == 3:
+	if sys.argv[1].endswith(".svg"):
+		droppedFile	=	sys.argv[1]
+		with open(sys.argv[2], 'r') as LIST:
+			NameList	=	LIST.read().splitlines()
+	if sys.argv[1].endswith(".txt"):
+		droppedFile	=	sys.argv[2]
+		with open(sys.argv[1], 'r') as LIST:
+			NameList	=	LIST.read().splitlines()
+elif len(sys.argv) == 2:
+	droppedFile	=	sys.argv[1]
+	NameList	=	[]
 
-NameStop = int(input("How many parts: ") or 0)
+droppedName	=	droppedFile.rsplit("\\",1)[1].split(".")[0]
+droppedPath	=	droppedFile.rsplit("\\",1)[0] + "\\"
 
-# if NameStop == '':
-	# NameStop = 0
-# else:
-	# NameStop = int(NameStop)
+NameStop	=	int(input("How many parts: ") or 0)
 
-height = int(input("Image Height (default 768): ") or 768)
-
-# if height == '':
-	# height = 768
-# else:
-	# height = int(height)
+height		=	int(input("Image Height (default 768): ") or 768)
 
 os.chdir(droppedPath)
 if not os.path.exists(foldnam):
@@ -50,30 +52,29 @@ os.chdir(droppedPath + foldnam)
 if not os.path.exists(droppedName + ".png"):
 	with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 		for line in fref:
-			fout.write(line.replace("!TYPE!", titleProjLong).replace("!PART!", ""))
+			fout.write(REPLACE(line, titleProjLong))
 		fout.close()
 	os.system('inkscape Temp.svg -C -z -h '+str(1152)+' -e "'+droppedName+' - Full.png"')
 	os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+droppedName+'.png"')
 
-for name in range(1, NameStop + 1):
-	Snam = str(name)
-	Znam = format(name, '02')
-	if not os.path.exists(titleFilePart + " - " + Znam + ".png"):
-		print(titleFilePart + " - " + Znam + "\n")
+for place in range(1, NameStop + 1):
+	Znam	=	format(place, '02')
+	if not os.path.exists(titleFileList + " - " + Znam + ".png"):
+		print(titleFileList + " - " + Znam + "\n")
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 			for line in fref:
-				fout.write(line.replace("!TYPE!", titleProjLong).replace("!PART!", vidBreak + " " + Snam))
+				fout.write(REPLACE(line, titleProjLong, PART = place))
 			fout.close()
-		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+titleFilePart+' - '+Znam+'.png"')
+		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+titleFileList+' - '+Znam+'.png"')
 
 for name in NameList:
-	if not os.path.exists(titleFileList + " - " + name + ".png"):
-		print(titleFileList + " - " + name + "\n")
+	if not os.path.exists(titleProjEdit + " - " + name + ".png"):
+		print(titleProjEdit + " - " + name + "\n")
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 			for line in fref:
-				fout.write(line.replace("!TYPE!", titleProjEdit).replace("!PART!", name))
+				fout.write(REPLACE(line, titleProjLong, LIST = name))
 			fout.close()
-		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+titleFileList+' - '+name+'.png"')
+		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+titleProjEdit+' - '+name+'.png"')
 
 if os.path.exists("Temp.svg"):
 	os.remove("Temp.svg")
