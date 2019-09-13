@@ -16,21 +16,31 @@ titleFilePart = "Stream"
 titleFileList = "Review"
 #	File title for named thumbnails
 
-droppedFile = sys.argv[1]
-#	the location of the file dropped onto the script is stored in sys.argv[1]
-#		sys.argv[0] is the location of the script
+def	REPLACE(input, TYPE = titleProjLong, PART = "", LIST = ""):
+	if type(PART) == int:
+		PART	=	vidBreak + str(PART)
+	return(input.replace("!TYPE!", TYPE).replace("!PART!", PART).replace("!LIST!", LIST));
+#	custom function for applying the string replacements
+#		can make things a little cleaner, by placing the multiple replace commands inside it and having default values
+
+if len(sys.argv) == 3:
+	if sys.argv[1].endswith(".svg"):
+		droppedFile	=	sys.argv[1]
+		with open(sys.argv[2], 'r') as LIST:
+			NameList	=	LIST.read().splitlines()
+	if sys.argv[1].endswith(".txt"):
+		droppedFile	=	sys.argv[2]
+		with open(sys.argv[1], 'r') as LIST:
+			NameList	=	LIST.read().splitlines()
+elif len(sys.argv) == 2:
+	droppedFile	=	sys.argv[1]
+	NameList	=	[]
+#	checks the number of arguments passed to the script, as there will be an additional if a TXT file with a list of names is provided
+
 droppedName = droppedFile.rsplit("\\",1)[1].split(".")[0]
 #	pulls just the name from the droppedFile variable
 droppedPath = droppedFile.rsplit("\\",1)[0] + "\\"
 #	pulls just the location from the droppedFile variable and sticks the necessary \ at the end
-
-try:
-	with open(sys.argv[2], 'r') as LIST:
-		NameList = LIST.read().splitlines()
-except:
-	NameList = []
-#	tries to grab a second dropped filed and then read its contents into a list
-#	if there is no second dropped file, it makes the list empty
 
 NameStop = int(input("How many parts: ") or 0)
 #	asks the user to state how many Part images to create
@@ -51,57 +61,53 @@ os.chdir(droppedPath + foldnam)
 if not os.path.exists(droppedName + ".png"):
 	with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 		for line in fref:
-			fout.write(line.replace("!TYPE!", titleProjLong).replace("!PART!", ""))
+			fout.write(REPLACE(line, titleProjLong))
 		fout.close()
 	os.system('inkscape Temp.svg -C -z -h '+str(1152)+' -e "'+droppedName+' - Full.png"')
 	os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+droppedName+'.png"')
 #	creates a version of the thumbnail only identifying the Type
 #	there is both a full resolution version for stream background and one sized for upload to YouTube
 
-for name in range(1, NameStop + 1):
+for place in range(1, NameStop + 1):
 #	a For loop to go from 1 to the desired number passed to the scripts
 #		The '+ 1' is necessary because Python excludes the top of the range
-	Snam = str(name)
-#		string version of the name for easy line replacement
-	Znam = format(name, '02')
-#		zero-padded version of the name for export file names
-	if not os.path.exists(titleFilePart + " - " + Znam + ".png"):
+	Znam	=	format(place, '02')
+#		creates a string from the place variable, with zero padding to 2 digits
+	if not os.path.exists(titleFileList + " - " + Znam + ".png"):
 #		checks if the thumbnail already exists and will skip if it does
-		print(titleFilePart + " - " + Znam + "\n")
+		print(titleFileList + " - " + Znam + "\n")
 #			prints a message identifying the thumbnail being generated
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 #			opens and reads the original SVG to the fref variable
 #			opens the Temp.svg file for writing too, and calls it fout
 			for line in fref:
 #				reads through each line from the reference file
-				fout.write(line.replace("!TYPE!", titleProjLong).replace("!PART!", "Part " + Snam))
-#					replaces the !TYPE! and !PART! text in the reference file with the 'title' and 'Snam' variables
-#						note it is writing to fout, not fref, so the reference file is never changed
-#						a new version of Temp.svg is made each time
+				fout.write(REPLACE(line, titleProjLong, PART = place))
+#					uses the custom REPLACE command on every line in the reference file
+#						it is not necessary to identify the PART argument, but it does not hurt
 			fout.close()
 #				closes fout, which finishes the file so it can be used
-		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+titleFilePart+' - '+Znam+'.png"')
+		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+titleFileList+' - '+Znam+'.png"')
 #			goes to the OS to run the provided command, in this case Inkscape
 #				info on Inkscape commands:	https://inkscape.org/en/doc/inkscape-man.html
 
 for name in NameList:
 #	For loop going through the list of video names that can be given to the script
-	if not os.path.exists(titleFileList + " - " + name + ".png"):
+	if not os.path.exists(titleProjEdit + " - " + name + ".png"):
 #		checks if the thumbnail already exists and will skip if it does
-		print(titleFileList + " - " + name + "\n")
+		print(titleProjEdit + " - " + name + "\n")
 #			prints a message identifying the thumbnail being generated
 		with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
 #			opens and reads the original SVG to the fref variable
 #			opens the Temp.svg file for writing too, and calls it fout
 			for line in fref:
 #				reads through each line from the reference file
-				fout.write(line.replace("!TYPE!", titleProjEdit).replace("!PART!", name))
-#					replaces the !TYPE! and !PART! text in the reference file with the 'title' and 'Snam' variables
-#						note it is writing to fout, not fref, so the reference file is never changed
-#						a new version of Temp.svg is made each time
+				fout.write(REPLACE(line, titleProjLong, LIST = name))
+#					uses the custom REPLACE command on every line in the reference file
+#						it is necessary to identify the LIST argument
 			fout.close()
 #				closes fout, which finishes the file so it can be used
-		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+titleFileList+' - '+name+'.png"')
+		os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+titleProjEdit+' - '+name+'.png"')
 #			goes to the OS to run the provided command, in this case Inkscape
 #				info on Inkscape commands:	https://inkscape.org/en/doc/inkscape-man.html
 
