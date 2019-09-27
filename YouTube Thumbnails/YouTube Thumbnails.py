@@ -21,18 +21,14 @@ def	REPLACE(input, TYPE = titleProjLong, PART = "", LIST = ""):
 		PART	=	vidBreak + str(PART)
 	return(input.replace("!TYPE!", TYPE).replace("!PART!", PART).replace("!LIST!", LIST));
 
-if len(sys.argv) == 3:
-	if sys.argv[1].endswith(".svg"):
-		droppedFile	=	sys.argv[1]
-		with open(sys.argv[2], 'r') as LIST:
+NameList	=	[]
+
+for ARG in sys.argv:
+	if ARG.endswith(".svg"):
+		droppedFile	=	ARG
+	if ARG.endswith(".txt"):
+		with open(ARG, 'r') as LIST:
 			NameList	=	LIST.read().splitlines()
-	if sys.argv[1].endswith(".txt"):
-		droppedFile	=	sys.argv[2]
-		with open(sys.argv[1], 'r') as LIST:
-			NameList	=	LIST.read().splitlines()
-elif len(sys.argv) == 2:
-	droppedFile	=	sys.argv[1]
-	NameList	=	[]
 
 droppedName	=	droppedFile.rsplit("\\",1)[1].split(".")[0]
 droppedPath	=	droppedFile.rsplit("\\",1)[0] + "\\"
