@@ -23,19 +23,16 @@ def	REPLACE(input, TYPE = titleProjLong, PART = "", LIST = ""):
 #	custom function for applying the string replacements
 #		can make things a little cleaner, by placing the multiple replace commands inside it and having default values
 
-if len(sys.argv) == 3:
-	if sys.argv[1].endswith(".svg"):
-		droppedFile	=	sys.argv[1]
-		with open(sys.argv[2], 'r') as LIST:
+NameList	=	[]
+#	creates an empty list for holding the list of names
+
+for ARG in sys.argv:
+	if ARG.endswith(".svg"):
+		droppedFile	=	ARG
+	if ARG.endswith(".txt"):
+		with open(ARG, 'r') as LIST:
 			NameList	=	LIST.read().splitlines()
-	if sys.argv[1].endswith(".txt"):
-		droppedFile	=	sys.argv[2]
-		with open(sys.argv[1], 'r') as LIST:
-			NameList	=	LIST.read().splitlines()
-elif len(sys.argv) == 2:
-	droppedFile	=	sys.argv[1]
-	NameList	=	[]
-#	checks the number of arguments passed to the script, as there will be an additional if a TXT file with a list of names is provided
+#	goes through the list of arguments, assigning them to the proper variables depending on what the extensions are
 
 droppedName = droppedFile.rsplit("\\",1)[1].split(".")[0]
 #	pulls just the name from the droppedFile variable
