@@ -43,12 +43,13 @@ if not os.path.exists(foldnam):
 os.chdir(droppedPath + foldnam)
 
 
-if not os.path.exists(droppedName + ".png"):
-	with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
-		for line in fref:
-			fout.write(REPLACE(line, titleProjLong))
-		fout.close()
+with open(droppedFile, 'r') as fref, open('Temp.svg', 'w') as fout:
+	for line in fref:
+		fout.write(REPLACE(line, titleProjLong))
+	fout.close()
+if not os.path.exists(droppedName + " - Full.png"):
 	os.system('inkscape Temp.svg -C -z -h '+str(1152)+' -e "'+droppedName+' - Full.png"')
+if not os.path.exists(droppedName + ".png"):
 	os.system('inkscape Temp.svg -C -z -h '+str(height)+' -e "'+droppedName+'.png"')
 
 for place in range(1, NameStop + 1):
